@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "shop-inventory-dev"
+client_id = "7ea1a40aea6c12f3b4f2bdfd9943741e"
+application_url = "https://where-longest-trap-grand.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://where-longest-trap-grand.trycloudflare.com/auth/callback",
+  "https://where-longest-trap-grand.trycloudflare.com/auth/shopify/callback",
+  "https://where-longest-trap-grand.trycloudflare.com/api/auth/callback",
+  "https://where-longest-trap-grand.trycloudflare.com/.shopify/graphiql/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-10"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-1e9ce5eb.myshopify.com"

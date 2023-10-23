@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id          String    @id @map("_id")
+  shop        String
+  state       String
+  isOnline    Boolean   @default(false)
+  scope       String?
+  expires     DateTime?
+  accessToken String
+  userId      BigInt?
+}
+
+model Store {
+  id           String   @id @map("_id")
+  store        String
+  access_token String
+  createdAt    DateTime @default(now())
+  isActive     Boolean  @default(false)
+}
+
+model ProductList {
+  id                String   @id @map("_id")
+  store             String   @db.String
+  product_image     String?
+  title             String
+  product_id        String
+  variant_title     String?
+  variant_id        String?
+  inventory_item_id String?
+  quantity          Int?
+  tracked           Boolean  @default(true)
+  isActive          Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Product {
+  id            String   @id @map("_id")
+  store         String
+  product_image String?
+  product_id    String
+  title         String
+  variant_title String?
+  variant_id    String?
+  buy           Int?
+  inventory     Int?
+  is_out_stock  Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isActive      Boolean  @default(false)
+  status        String?
+}
