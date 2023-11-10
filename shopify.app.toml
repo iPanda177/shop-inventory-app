@@ -2,19 +2,19 @@
 
 name = "shop-inventory-dev"
 client_id = "7ea1a40aea6c12f3b4f2bdfd9943741e"
-application_url = "https://where-longest-trap-grand.trycloudflare.com"
+application_url = "https://numerous-liver-workplace-innovations.trycloudflare.com"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "read_products,write_products,read_orders,write_orders,read_inventory,write_inventory"
 
 [auth]
 redirect_urls = [
-  "https://where-longest-trap-grand.trycloudflare.com/auth/callback",
-  "https://where-longest-trap-grand.trycloudflare.com/auth/shopify/callback",
-  "https://where-longest-trap-grand.trycloudflare.com/api/auth/callback",
-  "https://where-longest-trap-grand.trycloudflare.com/.shopify/graphiql/auth/callback"
+  "https://numerous-liver-workplace-innovations.trycloudflare.com/auth/callback",
+  "https://numerous-liver-workplace-innovations.trycloudflare.com/auth/shopify/callback",
+  "https://numerous-liver-workplace-innovations.trycloudflare.com/api/auth/callback",
+  "https://numerous-liver-workplace-innovations.trycloudflare.com/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]

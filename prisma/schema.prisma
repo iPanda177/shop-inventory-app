@@ -5,13 +5,19 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "mongodb"
+//   url      = env("DATABASE_URL")
+// }
+
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.sqlite"
 }
 
 model Session {
-  id          String    @id @map("_id")
+  // id          String    @id @map("_id")
+  id          String    @id
   shop        String
   state       String
   isOnline    Boolean   @default(false)
@@ -22,7 +28,8 @@ model Session {
 }
 
 model Store {
-  id           String   @id @map("_id")
+  // id           String   @id @map("_id")
+  id           String   @id @default(cuid())
   store        String
   access_token String
   createdAt    DateTime @default(now())
@@ -30,8 +37,10 @@ model Store {
 }
 
 model ProductList {
-  id                String   @id @map("_id")
-  store             String   @db.String
+  // id                String   @id @map("_id")
+  id                String   @id @default(cuid())
+  store             String
+  // store             String   @db.String
   product_image     String?
   title             String
   product_id        String
@@ -46,14 +55,14 @@ model ProductList {
 }
 
 model Product {
-  id            String   @id @map("_id")
+  id            String   @id @default(cuid())
   store         String
   product_image String?
   product_id    String
   title         String
-  variant_title String?
-  variant_id    String?
-  buy           Int?
+  variant_title String
+  variant_id    String
+  buy           Int      @default(0)
   inventory     Int?
   is_out_stock  Boolean  @default(false)
   createdAt     DateTime @default(now())

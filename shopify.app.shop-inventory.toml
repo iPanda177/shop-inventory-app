@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "Shop Inventory"
+client_id = "ddd5645722003fb0b02e3c7200ab7af3"
+application_url = "https://soil-occupation-invitation-warriors.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_products,write_products,read_orders,write_orders,read_inventory,write_inventory"
+
+[auth]
+redirect_urls = [
+  "https://soil-occupation-invitation-warriors.trycloudflare.com/auth/callback",
+  "https://soil-occupation-invitation-warriors.trycloudflare.com/auth/shopify/callback",
+  "https://soil-occupation-invitation-warriors.trycloudflare.com/api/auth/callback",
+  "https://soil-occupation-invitation-warriors.trycloudflare.com/.shopify/graphiql/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-10"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "shop-inventory-dev.myshopify.com"
