@@ -1,13 +1,12 @@
 import "@shopify/shopify-app-remix/adapters/node";
 import {
-  ApiVersion,
   AppDistribution,
   DeliveryMethod,
   LATEST_API_VERSION,
   shopifyApp,
 } from "@shopify/shopify-app-remix/server";
 import {PrismaSessionStorage} from "@shopify/shopify-app-session-storage-prisma";
-import {restResources} from "@shopify/shopify-api/rest/admin/2023-07";
+import {restResources} from "@shopify/shopify-api/rest/admin/2023-10";
 import prisma from "./db.server";
 
 console.log(process.env.SHOPIFY_API_KEY)
