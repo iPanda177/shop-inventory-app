@@ -10,6 +10,8 @@ import {PrismaSessionStorage} from "@shopify/shopify-app-session-storage-prisma"
 import {restResources} from "@shopify/shopify-api/rest/admin/2023-07";
 import prisma from "./db.server";
 
+console.log(process.env.SHOPIFY_API_KEY)
+
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
@@ -20,6 +22,7 @@ const shopify = shopifyApp({
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
   restResources,
+  isEmbeddedApp: true,
   webhooks: {
     APP_UNINSTALLED: {
       deliveryMethod: DeliveryMethod.Http,
