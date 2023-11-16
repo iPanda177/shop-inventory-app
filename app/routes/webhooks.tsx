@@ -16,8 +16,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     throw new Response();
   }
 
-  console.log(topic, payload)
-
   switch (topic) {
     case "PRODUCTS_CREATE":
       try {

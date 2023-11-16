@@ -2,7 +2,7 @@
 
 name = "Shop Inventory"
 client_id = "ddd5645722003fb0b02e3c7200ab7af3"
-application_url = "https://b97d-194-31-212-75.ngrok-free.app"
+application_url = "https://c7eb-194-31-212-75.ngrok-free.app"
 embedded = true
 
 [access_scopes]
@@ -11,10 +11,10 @@ scopes = "read_products,write_products,read_orders,write_orders,read_inventory,w
 
 [auth]
 redirect_urls = [
-  "https://andrii.ngrok.app/auth/callback",
-  "https://andrii.ngrok.app/auth/shopify/callback",
-  "https://andrii.ngrok.app/api/auth/callback",
-  "https://andrii.ngrok.app/.shopify/graphiql/auth/callback"
+  "https://c7eb-194-31-212-75.ngrok-free.app/auth/callback",
+  "https://c7eb-194-31-212-75.ngrok-free.app/auth/shopify/callback",
+  "https://c7eb-194-31-212-75.ngrok-free.app/api/auth/callback",
+  "https://c7eb-194-31-212-75.ngrok-free.app/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]
@@ -25,4 +25,4 @@ embedded = false
 
 [build]
 automatically_update_urls_on_dev = true
-dev_store_url = "shop-inventory-dev.myshopify.com"
+dev_store_url = "shop-inventory-prod.myshopify.com"

@@ -16,7 +16,8 @@ datasource db {
 // }
 
 model Session {
-  id          String    @id @map("_id")
+  session_id  String    @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @unique
   // id          String    @id
   shop        String
   state       String
