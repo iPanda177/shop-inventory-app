@@ -57,6 +57,7 @@ model ProductList {
 
 model Product {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  // id            String   @id @default(cuid())
   store         String
   product_image String?
   product_id    String
