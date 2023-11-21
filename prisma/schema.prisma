@@ -29,16 +29,16 @@ model Session {
 }
 
 model Store {
-  id           String   @id @map("_id")
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   // id           String   @id @default(cuid())
-  store        String
+  store        String   @unique
   access_token String
   createdAt    DateTime @default(now())
   isActive     Boolean  @default(false)
 }
 
 model ProductList {
-  id                String   @id @map("_id")
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   // id                String   @id @default(cuid())
   store             String
   // store             String   @db.String
@@ -56,7 +56,7 @@ model ProductList {
 }
 
 model Product {
-  id            String   @id @map("_id")
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   store         String
   product_image String?
   product_id    String
