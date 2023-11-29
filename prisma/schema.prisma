@@ -62,8 +62,8 @@ model Product {
   product_image String?
   product_id    String
   title         String
-  variant_title String
-  variant_id    String
+  variant_title String?
+  variant_id    String?
   buy           Int      @default(0)
   inventory     Int?
   is_out_stock  Boolean  @default(false)

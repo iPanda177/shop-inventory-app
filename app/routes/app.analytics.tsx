@@ -399,7 +399,7 @@ export default function Analytics() {
                 <IndexTable.Cell>{truncate(buy)}</IndexTable.Cell>
                 <IndexTable.Cell>{parseFloat(average_sale).toFixed(2)}</IndexTable.Cell>
                 <IndexTable.Cell>{out_stock}</IndexTable.Cell>
-                <IndexTable.Cell>{0}</IndexTable.Cell>
+                <IndexTable.Cell>{available_stock}</IndexTable.Cell>
                 <IndexTable.Cell>{0}</IndexTable.Cell>
                 <IndexTable.Cell>{0}</IndexTable.Cell>
                 <IndexTable.Cell>{0}</IndexTable.Cell>
