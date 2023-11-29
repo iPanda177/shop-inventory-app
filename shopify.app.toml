@@ -2,7 +2,7 @@
 
 name = "Shop Inventory"
 client_id = "ddd5645722003fb0b02e3c7200ab7af3"
-application_url = "https://stockify.cloud"
+application_url = "https://doom-satisfy-try-howto.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,10 +11,10 @@ scopes = "read_products,write_products,read_orders,write_orders,read_inventory,w
 
 [auth]
 redirect_urls = [
-  "https://stockify.cloud/auth/callback",
-  "https://stockify.cloud/auth/shopify/callback",
-  "https://stockify.cloud/api/auth/callback",
-  "https://stockify.cloud/.shopify/graphiql/auth/callback"
+  "https://doom-satisfy-try-howto.trycloudflare.com/auth/callback",
+  "https://doom-satisfy-try-howto.trycloudflare.com/auth/shopify/callback",
+  "https://doom-satisfy-try-howto.trycloudflare.com/api/auth/callback",
+  "https://doom-satisfy-try-howto.trycloudflare.com/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]
