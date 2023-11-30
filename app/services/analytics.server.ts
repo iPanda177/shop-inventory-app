@@ -1,7 +1,7 @@
 import * as path from "path";
 // @ts-ignore
 import xl from "excel4node";
-import {createObjectCsvWriter} from "csv-writer";
+import { createObjectCsvWriter } from "csv-writer";
 
 export function dateDifference(date1: any, date2: any) {
   return Math.ceil((date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
@@ -22,9 +22,13 @@ export function sortData(data: any, sortCriteria: any) {
     case "out_stock desc":
       return data.sort((a: any, b: any) => b.out_stock - a.out_stock);
     case "available_stock asc":
-      return data.sort((a: any, b: any) => a.available_stock - b.available_stock);
+      return data.sort(
+        (a: any, b: any) => a.available_stock - b.available_stock
+      );
     case "available_stock desc":
-      return data.sort((a: any, b: any) => b.available_stock - a.available_stock);
+      return data.sort(
+        (a: any, b: any) => b.available_stock - a.available_stock
+      );
     default:
       return data;
   }
@@ -33,8 +37,8 @@ export function sortData(data: any, sortCriteria: any) {
 export async function csvGenerate(jsonArray: any, header: any) {
   const data = jsonArray;
 
-  const filePath = path.join(__dirname, `../public`)
-  let csv_file = `${filePath}/csv_analytic.csv`
+  const filePath = path.join(__dirname, `../public`);
+  let csv_file = `${filePath}/csv_analytic.csv`;
 
   const csvWriter = createObjectCsvWriter({
     path: csv_file,
@@ -42,69 +46,81 @@ export async function csvGenerate(jsonArray: any, header: any) {
   });
 
   try {
-    await csvWriter.writeRecords(data)
-    console.log('Export file successfully written.');
+    await csvWriter.writeRecords(data);
+    console.log("Export file successfully written.");
 
     return { status: true, csvUrl: `${process.env.SHOPIFY_APP_URL}/csv` };
-
   } catch (error) {
-    console.log(error)
-    return { status: false, error: 'Error writing CSV file' }
+    console.log(error);
+    return { status: false, error: "Error writing CSV file" };
   }
 }
 
 export async function excelGenerate(jsonArray: any, headingColumnNames: any) {
   const wb = new xl.Workbook();
-  const ws = wb.addWorksheet('Worksheet Name');
+  const ws = wb.addWorksheet("Worksheet Name");
 
   let headingColumnIndex = 1;
   headingColumnNames.forEach((heading: any) => {
-    ws.cell(1, headingColumnIndex++)
-      .string(heading)
+    ws.cell(1, headingColumnIndex++).string(heading);
   });
 
   let rowIndex = 2;
   jsonArray.forEach((record: any) => {
-    Object.keys(record).forEach(columnName => {
+    Object.keys(record).forEach((columnName) => {
       let data = record[columnName].toString();
-      if(columnName === 'product_title'){
-        ws.cell(rowIndex, 1).string(data)
-      }else if(columnName === 'variant_title'){
-        ws.cell(rowIndex, 2).string(data)
-      }else if(columnName === 'buy'){
-        ws.cell(rowIndex, 3).string(data)
-      }else if(columnName === 'average_sale'){
-        ws.cell(rowIndex, 4).string(data)
-      }else if(columnName === 'out_stock'){
-        ws.cell(rowIndex, 5).string(data)
-      }else if(columnName === 'avialable_stock'){
-        ws.cell(rowIndex, 6).string(data)
+      if (columnName === "product_title") {
+        ws.cell(rowIndex, 1).string(data);
+      } else if (columnName === "variant_title") {
+        ws.cell(rowIndex, 2).string(data);
+      } else if (columnName === "buy") {
+        ws.cell(rowIndex, 3).string(data);
+      } else if (columnName === "average_sale") {
+        ws.cell(rowIndex, 4).string(data);
+      } else if (columnName === "out_stock") {
+        ws.cell(rowIndex, 5).string(data);
+      } else if (columnName === "avialable_stock") {
+        ws.cell(rowIndex, 6).string(data);
       }
-
     });
     rowIndex++;
   });
-  const filePath = path.join(__dirname, `../public`)
+  const filePath = path.join(__dirname, `../public`);
   await wb.write(`${filePath}/xls_analytic.xlsx`);
   return { status: true, csvUrl: `${process.env.SHOPIFY_APP_URL}/xlsx` };
 }
 
-export async function getAnalytics(shop: string, date_start: any, date_to: any, skip: any, limit: any, sort: any, reset: boolean) {
+export async function getAnalytics(
+  shop: string,
+  date_start: any,
+  date_to: any,
+  skip: any,
+  limit: any,
+  sort: any,
+  reset: boolean
+) {
   try {
-    console.log(skip, limit)
+    console.log(skip, limit);
     const today = new Date();
     const skip_data = Number(skip || 0);
     const show_data = Number(limit || 10);
-    date_start = date_start ? new Date(date_start) :
-      new Date(new Date(new Date(today.setMonth(today.getMonth() - 1)).setHours(0, 0, 0, 0)).toISOString().split('T')[0])
-    date_start = new Date(date_start.setHours(0, 0, 0, 0))
+    date_start = date_start
+      ? new Date(date_start)
+      : new Date(
+          new Date(
+            new Date(today.setMonth(today.getMonth() - 1)).setHours(0, 0, 0, 0)
+          )
+            .toISOString()
+            .split("T")[0]
+        );
+    date_start.setHours(0, 0, 0, 0);
 
     let date_end = date_to ? new Date(date_to) : new Date();
-    date_end = new Date(date_end.setHours(24, 0, 0, 0))
+    date_end.setHours(24, 0, 0, 0);
 
     let total_days = dateDifference(date_start, date_end);
 
-    if (dateDifference(date_start, date_end) < 0) {
+    if (total_days < 0) {
       return false;
     }
 
@@ -113,39 +129,48 @@ export async function getAnalytics(shop: string, date_start: any, date_to: any, 
         store: shop,
         updatedAt: {
           gte: date_start,
-          lte: date_end
+          lte: date_end,
         },
       },
     });
 
-    const productsMap: any = {};
+    const productsMap: { [key: string]: any } = {};
 
     analytics.forEach((product) => {
-        const key = product.variant_id
+      const key = product.variant_id;
+      if (!key) {
+        return;
+      }
 
-        if (productsMap[key]) {
-          productsMap[key].buy += product.buy;
-          productsMap[key].out_stock += product.is_out_stock ? 1 : 0;
-          productsMap[key].available_stock = total_days - productsMap[key].out_stock;
-          productsMap[key].average_sale = productsMap[key].available_stock ? productsMap[key].buy / productsMap[key].available_stock : 0;
-        } else {
-          productsMap[key] = {
-            id: product.id,
-            title: product.title,
-            product_id: product.product_id,
-            product_image: product.product_image,
-            variant_id: product.variant_id,
-            variant_title: product.variant_title,
-            updatedAt: product.updatedAt,
-            isActive: product.isActive,
-            inventory: product.inventory,
-            out_stock: product.is_out_stock ? 1 : 0,
-            buy: product.buy,
-          }
+      if (productsMap[key]) {
+        productsMap[key].buy += product.buy;
+        productsMap[key].out_stock += product.is_out_stock ? 1 : 0;
+        productsMap[key].available_stock =
+          total_days - productsMap[key].out_stock;
+        productsMap[key].average_sale = productsMap[key].available_stock
+          ? productsMap[key].buy / productsMap[key].available_stock
+          : 0;
+      } else {
+        productsMap[key] = {
+          id: product.id,
+          title: product.title,
+          product_id: product.product_id,
+          product_image: product.product_image,
+          variant_id: product.variant_id,
+          variant_title: product.variant_title,
+          updatedAt: product.updatedAt,
+          isActive: product.isActive,
+          inventory: product.inventory,
+          out_stock: product.is_out_stock ? 1 : 0,
+          buy: product.buy,
+        };
 
-          productsMap[key].available_stock = total_days - productsMap[key].out_stock;
-          productsMap[key].average_sale = productsMap[key].available_stock ? productsMap[key].buy / productsMap[key].available_stock : 0;
-        }
+        productsMap[key].available_stock =
+          total_days - productsMap[key].out_stock;
+        productsMap[key].average_sale = productsMap[key].available_stock
+          ? productsMap[key].buy / productsMap[key].available_stock
+          : 0;
+      }
     });
 
     const groupedAnalytics = Object.values(productsMap);
@@ -156,8 +181,8 @@ export async function getAnalytics(shop: string, date_start: any, date_to: any, 
       sale: sliced,
       day: total_days > 0 ? total_days : 0,
       total: analytics.length,
-      reset: reset
-    }
+      reset: reset,
+    };
   } catch (err: any) {
     return {
       status: false,

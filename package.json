@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "NODE_ENV=production remix build",
-    "predev": "prisma generate && prisma migrate deploy",
+    "predev": "prisma generate",
     "dev": "shopify app dev",
     "config:link": "shopify app config link",
     "config:push": "shopify app config push",
@@ -13,7 +13,7 @@
     "env": "shopify app env",
     "start": "remix-serve build/index.js",
     "docker-start": "npm run setup && npm run start",
-    "setup": "prisma generate && prisma migrate deploy",
+    "setup": "prisma generate",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "shopify": "shopify",
     "prisma": "prisma"
@@ -44,6 +44,7 @@
     "@remix-run/eslint-config": "^2.0.0",
     "@types/eslint": "^8.40.0",
     "@types/node": "^20.6.3",
+    "@types/node-cron": "^3.0.11",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "eslint": "^8.42.0",

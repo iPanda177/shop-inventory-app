@@ -5,18 +5,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//   provider = "mongodb"
-//   url      = env("DATABASE_URL")
-// }
-
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.sqlite"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model Session {
-  // session_id  String    @id @default(auto()) @map("_id") @db.ObjectId
+  session_id  String    @id @default(auto()) @map("_id") @db.ObjectId
   id          String    @unique
   // id          String    @id
   shop        String
@@ -29,8 +24,8 @@ model Session {
 }
 
 model Store {
-  // id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  id           String   @id @default(cuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  // id           String   @id @default(cuid())
   store        String   @unique
   access_token String
   createdAt    DateTime @default(now())
@@ -38,8 +33,8 @@ model Store {
 }
 
 model ProductList {
-  // id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  id                String   @id @default(cuid())
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  // id                String   @id @default(cuid())
   store             String
   // store             String   @db.String
   product_image     String?
@@ -56,8 +51,8 @@ model ProductList {
 }
 
 model Product {
-  // id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  id            String   @id @default(cuid())
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  // id            String   @id @default(cuid())
   store         String
   product_image String?
   product_id    String

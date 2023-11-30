@@ -7,11 +7,11 @@ import {
 } from "@remix-run/node";
 import isbot from "isbot";
 import { addDocumentResponseHeaders } from "./shopify.server";
-import updateProducts from "~/cron.server";
+import startUpdateProducts from "~/cron.server";
 
 const ABORT_DELAY = 5000;
 
-updateProducts();
+startUpdateProducts();
 export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
